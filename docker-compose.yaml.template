@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  utopia1:
+    image: utopia:latest
+    environment:
+      - WORKER_NUMBER=1
+      - TOKEN=
+  utopia2:
+    image: utopia:latest
+    environment:
+      - WORKER_NUMBER=2
+      - TOKEN=
