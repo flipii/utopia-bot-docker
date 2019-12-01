@@ -5,7 +5,6 @@ Collection of scripts and tools to deploy out Utopia mining bot threads.
 
 ## Requirements
 
-Need the following installed to run the scripts
 ```
 sudo apt update
 sudo apt install docker.io docker-compose
@@ -19,7 +18,7 @@ cd utopia-bot-docker
 ./fill_tokens.sh
 ```
 
-Enter tokens for each bot and `q` to quit.
+Enter tokens for each bot and blank line to quit.
 This will create worker blocks with your tokens in `docker-compose.yaml`.
 
 
@@ -32,6 +31,11 @@ Build container with latest mining bot version and start all workers staggerring
 
 Can re-run the above command to update mining bot versions.
 
+To add workers to an existing deployment
+```
+./add_tokens.sh
+sudo docker-compose up -d
+```
 
 ## Useful commands
 
