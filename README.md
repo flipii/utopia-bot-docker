@@ -5,10 +5,11 @@ Collection of scripts and tools to deploy out Utopia mining bot threads.
 
 ## Requirements
 
-Need the following installed to run the scripts:
-- docker.io
-- `docker-compose` 
-
+Need the following installed to run the scripts
+```
+sudo apt update
+sudo apt install docker.io docker-compose
+```
 
 ## Installation
 
@@ -24,7 +25,7 @@ This will create worker blocks with your tokens in `docker-compose.yaml`.
 
 ## Getting Started
 
-Build container with latest mining bot version and start all workers staggerring them 1 minute apart:
+Build container with latest mining bot version and start all workers staggerring them 1 minute apart
 ```
 ./build_deploy.sh
 ```
@@ -34,12 +35,12 @@ Can re-run the above command to update mining bot versions.
 
 ## Useful commands
 
-See all running containers in order:
+See all running containers in order
 ```
 sudo docker ps --format '{{.Names}}' | sort -V
 ```
 
-Get number of containers still running:
+Get number of containers still running
 ```
 sudo docker ps -qa | wc -l
 ```
@@ -49,13 +50,13 @@ Get number of containers already while booting up:
 expr $( sudo docker-compose logs --tail 1 | wc -l ) - 1
 ```
 
-Kill bottom 4 containers:
+Kill bottom 4 containers
 ```
 NUM_TO_DELETE=4
 sudo docker ps --format '{{.Names}}' | sort -V | tail -n $NUM_TO_DELETE | xargs sudo docker rm -f
 ```
 
-Install swap memory:
+Install swap memory
 ```
 sudo dd if=/dev/zero of=/swapfile bs=1G count=16
 sudo chmod 0600 /swapfile
