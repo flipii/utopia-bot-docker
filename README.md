@@ -49,10 +49,16 @@ Get number of containers already while booting up:
 expr $( sudo docker-compose logs --tail 1 | wc -l ) - 1
 ```
 
+Kill bottom 4 containers:
+```
+NUM_TO_DELETE=4
+sudo docker ps --format '{{.Names}}' | sort -V | tail -n $NUM_TO_DELETE | xargs sudo docker rm -f
+```
+
 Install swap memory:
 ```
 sudo dd if=/dev/zero of=/swapfile bs=1G count=16
-chmod 0600 /swapfile
+sudo chmod 0600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
 ```
