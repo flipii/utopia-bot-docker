@@ -19,19 +19,19 @@ cd utopia-bot-docker
 ```
 
 Enter tokens for each bot and blank line to quit.
-This will create worker blocks with your tokens in `docker-compose.yaml`.
+This will create mining thread worker blocks with your tokens in `docker-compose.yaml`.
 
 
 ## Getting Started
 
-Build container with latest mining bot version and start all workers staggerring them 1 minute apart
+Build container with latest mining bot version and start all mining threads staggerring them 1 minute apart
 ```
 ./build_deploy.sh
 ```
 
 Can re-run the above command to update mining bot versions.
 
-To add workers to an existing deployment
+To add mining threads to an existing deployment
 ```
 ./add_tokens.sh
 sudo docker-compose up -d
@@ -54,7 +54,7 @@ Get number of containers already while booting up:
 expr $( sudo docker-compose logs --tail 1 | wc -l ) - 1
 ```
 
-Kill bottom 4 containers
+Kill bottom 4 mining threads
 ```
 NUM_TO_DELETE=4
 sudo docker ps --format '{{.Names}}' | sort -V | tail -n $NUM_TO_DELETE | xargs sudo docker rm -f
@@ -67,3 +67,20 @@ sudo chmod 0600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
 ```
+
+Install nerdcommenter for vim
+```
+mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+cd ~/.vim/bundle/
+git clone https://github.com/scrooloose/nerdcommenter.git
+cd -
+cat >> ~/.vimrc <<- EOF
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+EOF
+```
+
+
+## Donations welcome :pray:
+Crypton: 471B0056840BBA80
