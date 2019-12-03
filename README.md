@@ -7,7 +7,7 @@ Collection of scripts and tools to deploy out Utopia mining bot threads.
 
 ```
 sudo apt update
-sudo apt install docker.io docker-compose
+sudo apt install -y docker.io docker-compose
 ```
 
 ## Installation
@@ -54,6 +54,11 @@ Get number of containers already while booting up:
 expr $( sudo docker-compose logs --tail 1 | wc -l ) - 1
 ```
 
+Get container names without connections
+```
+sudo docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' '
+```
+
 Kill bottom 4 mining threads
 ```
 NUM_TO_DELETE=4
@@ -70,6 +75,7 @@ sudo swapon /swapfile
 
 Install nerdcommenter for vim
 ```
+sudo apt install -y vim
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 cd ~/.vim/bundle/
 git clone https://github.com/scrooloose/nerdcommenter.git

@@ -5,10 +5,10 @@ cp docker-compose.yaml.template docker-compose.yaml
 worker_number=1
 
 while true; do
-    echo "Enter token (q to exit): "
+    echo "Enter token (blank to exit): "
     read token
 
-    if [[ "$token" == 'q' ]]; then
+    if [ -z "$token" ]; then
         break
     fi
 
