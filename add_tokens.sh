@@ -1,5 +1,7 @@
 #!/bin/bash
 
+tail -n 20 docker-compose.yaml
+
 echo "Enter worker number to start at:"
 read worker_number
 

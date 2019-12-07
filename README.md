@@ -59,6 +59,11 @@ Get container names without connections
 sudo docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' '
 ```
 
+Kill mining threads with no connections
+```
+sudo docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' ' | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | xargs -I {} sudo docker rm -f utopiabotdocker_{}
+```
+
 Kill bottom 4 mining threads
 ```
 NUM_TO_DELETE=4
