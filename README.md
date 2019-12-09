@@ -7,7 +7,8 @@ Collection of scripts and tools to deploy out Utopia mining bot threads.
 
 ```
 sudo apt update
-sudo apt install -y docker.io docker-compose
+sudo apt install -y docker.io docker-compose vim
+sudo usermod -aG docker ${USER}
 ```
 
 ## Installation
@@ -34,40 +35,40 @@ Can re-run the above command to update mining bot versions.
 To add mining threads to an existing deployment
 ```
 ./add_tokens.sh
-sudo docker-compose up -d
+docker-compose up -d
 ```
 
 ## Useful commands
 
 See all running containers in order
 ```
-sudo docker ps --format '{{.Names}}' | sort -V
+docker ps --format '{{.Names}}' | sort -V
 ```
 
 Get number of containers still running
 ```
-sudo docker ps -qa | wc -l
+docker ps -qa | wc -l
 ```
 
 Get number of containers already while booting up:
 ```
-expr $( sudo docker-compose logs --tail 1 | wc -l ) - 1
+expr $( docker-compose logs --tail 1 | wc -l ) - 1
 ```
 
 Get container names without connections
 ```
-sudo docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' '
+docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' '
 ```
 
 Kill mining threads with no connections
 ```
-sudo docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' ' | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | xargs -I {} sudo docker rm -f utopiabotdocker_{}
+docker-compose  logs --tail 1 | grep 0/0 | tail -n +2  | cut -f1 -d' ' | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g" | xargs -I {} docker rm -f utopiabotdocker_{}
 ```
 
 Kill bottom 4 mining threads
 ```
 NUM_TO_DELETE=4
-sudo docker ps --format '{{.Names}}' | sort -V | tail -n $NUM_TO_DELETE | xargs sudo docker rm -f
+docker ps --format '{{.Names}}' | sort -V | tail -n $NUM_TO_DELETE | xargs docker rm -f
 ```
 
 Install swap memory
