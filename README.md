@@ -73,10 +73,11 @@ docker ps --format '{{.Names}}' | sort -V | tail -n $NUM_TO_DELETE | xargs docke
 
 Install swap memory
 ```
-sudo dd if=/dev/zero of=/swapfile bs=1G count=16
-sudo chmod 0600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
+SWAP_FILE_NAME=swapfile
+sudo dd if=/dev/zero of=/$SWAP_FILE_NAME bs=1G count=16
+sudo chmod 0600 /$SWAP_FILE_NAME
+sudo mkswap /$SWAP_FILE_NAME
+sudo swapon /$SWAP_FILE_NAME
 ```
 
 Install nerdcommenter for vim
